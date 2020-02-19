@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.8)
 project (http-server)
 
 # https://docs.conan.io/en/latest/howtos/cmake_launch.html
@@ -12,8 +12,11 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 conan_check(REQUIRED)
 
+conan_add_remote(NAME conan-community
+	URL https://api.bintray.com/conan/conan-community/conan)
 conan_cmake_run(REQUIRES 
                   gtest/1.8.1@bincrafters/stable
+		  pistache/d5608a1@conan/stable
                 BASIC_SETUP 
                 CMAKE_TARGETS
                 BUILD missing)

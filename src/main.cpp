@@ -16,9 +16,12 @@ struct HelloHandler:
   }
 };
 
-int main() 
+int main(int argc, const char* argv[]) 
 {
-  constexpr char address[] = "*:9080";
-  std::cout << "Starting server at " << address << '\n';
-  Http::listenAndServe<HelloHandler>(Pistache::Address(address));
+  const ulong port = argc >= 2 ?
+    std::stoul(argv[1]) :
+    8080;
+
+  std::cout << "Starting server at port " << port << '\n';
+  Http::listenAndServe<HelloHandler>(Pistache::Address(Ipv4::any(), port));
 }

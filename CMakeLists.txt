@@ -17,6 +17,7 @@ conan_add_remote(NAME conan-community
 conan_cmake_run(REQUIRES 
                   gtest/1.8.1@bincrafters/stable
 		  pistache/d5608a1@conan/stable
+		  argparse/2.1
                 BASIC_SETUP 
                 CMAKE_TARGETS
                 BUILD missing)

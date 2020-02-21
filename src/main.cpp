@@ -18,9 +18,17 @@ struct HelloHandler:
 
 int main(int argc, const char* argv[]) 
 {
-  const ulong port = argc >= 2 ?
-    std::stoul(argv[1]) :
-    8080;
+  ulong port = 8080;
+  if (2 == argc) {
+    if (0 == std::strcmp(argv[1], "--help")) {
+      std::cout << "Usage:\n\t";
+      std::cout << argv[0] << " [port]\n\n";
+      exit(0);
+    }
+    else {
+      port = std::stoul(argv[1]);
+    }
+  }
 
   std::cout << "Starting server at port " << port << '\n';
   Http::listenAndServe<HelloHandler>(Pistache::Address(Ipv4::any(), port));

@@ -1,0 +1,21 @@
+name: Build 
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build the simple http server for gcc7-armv7
+        uses: ./.github/actions/xcompile-in-conan-docker
+        with:
+          target-duet: gcc7-armv7
+      - name: Uploading http-server artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: http-server-gcc7-armv7
+          path: ./build-gcc7-armv7/bin/http-server

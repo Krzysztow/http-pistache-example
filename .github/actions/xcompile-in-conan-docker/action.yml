@@ -1,0 +1,13 @@
+name: 'Building server'
+description: 'Builds simple HTTP server for a given arch using conan-io docker image for cross-compilation'
+inputs:
+  target-duet:
+    description: 'Target compiler-architecture matching conan-io image tags'
+    required: true
+    default: 'gcc7-armv7'
+runs:
+  using: 'docker'
+  image: 'docker://conanio/gcc7-armv7' #${{ inputs.target-duet }}
+  entrypoint: /github/workspace/.github/actions/xcompile-in-conan-docker/entrypoint.sh
+  args:
+    - ${{ inputs.target-duet }}
